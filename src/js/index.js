@@ -10,13 +10,15 @@ const searchbox = document.querySelector('#search-box');
 const countryListEl = document.querySelector('.country-list');
 const countryInfoEl = document.querySelector('.country-info');
 
+let markup = '';
+
 searchbox.addEventListener('input', debounce(() => {
     if (searchbox.value.trim() === '') {
         countryListEl.innerHTML = '';
         countryInfoEl.innerHTML = '';
         return;
     };
-    
+
     fetchCountries(searchbox.value.trim())
       .then(userdata => showCountries(userdata))
       .catch(error => showError(error));
@@ -32,23 +34,30 @@ function showCountries(counrtries) {
     }
 
     if ((counrtries.length >= 2) && (counrtries.length <= 10)) {
-        const markup = counrtries.map(item => 
+        countriesMarkup(counrtries);
+        return countryListEl.insertAdjacentHTML('beforeend', markup);
+    }
+
+    oneCountryMarkup(...counrtries);
+    return countryInfoEl.insertAdjacentHTML('beforeend', markup);
+}
+
+function countriesMarkup (counrtries) {
+    markup = counrtries.map(item => 
             `<li>
             <img src="${item.flags.svg}" class="avatar" alt="flag" width="30" />
             <span>${item.name.official}</span></li>`
         ).join('');
-        return countryListEl.insertAdjacentHTML('beforeend', markup);
-    }
-    const country = counrtries[0];
-    const markup = `<img src="${country.flags.svg}" class="avatar" alt="flag" width="30" />
-            <span class = 'title'>${country.name.official}</span>
+}
+
+function oneCountryMarkup ({flags, name,  capital, population, languages}) {
+    markup = `<img src="${flags.svg}" class="avatar" alt="flag" width="30" />
+            <span class = 'title'>${name.official}</span>
             <ul class = 'text'>
-            <li>Capital: <span class = 'text__normal'>${country.capital}</span></li>
-            <li>Population: <span class = 'text__normal'>${country.population}</span></li>
-            <li>Languages: <span class = 'text__normal'>${Object.keys(country.languages).join(', ')}</span></li>
+            <li>Capital: <span class = 'text__normal'>${capital}</span></li>
+            <li>Population: <span class = 'text__normal'>${population}</span></li>
+            <li>Languages: <span class = 'text__normal'>${Object.keys(languages).join(', ')}</span></li>
             </ul>`;
-    
-    return countryInfoEl.insertAdjacentHTML('beforeend', markup);
 }
 
 function showError() {
