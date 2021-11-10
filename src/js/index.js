@@ -18,7 +18,6 @@ searchbox.addEventListener('input', debounce(() => {
         countryInfoEl.innerHTML = '';
         return;
     };
-
     fetchCountries(searchbox.value.trim())
       .then(userdata => showCountries(userdata))
       .catch(error => showError(error));
