@@ -11,7 +11,12 @@ const countryListEl = document.querySelector('.country-list');
 const countryInfoEl = document.querySelector('.country-info');
 
 searchbox.addEventListener('input', debounce(() => {
-    if (searchbox.value.trim() === '') return;
+    if (searchbox.value.trim() === '') {
+        countryListEl.innerHTML = '';
+        countryInfoEl.innerHTML = '';
+        return;
+    };
+    
     fetchCountries(searchbox.value.trim())
       .then(userdata => showCountries(userdata))
       .catch(error => showError(error));
