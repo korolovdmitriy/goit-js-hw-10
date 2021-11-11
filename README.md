@@ -1,5 +1,5 @@
 # Own project
-Front-end part of the application to search for data about a country by its partial or full name. Watch a demo video of the application.
+Front-end part of the application to search for data about a country by its partial or full name. 
 
 **Stack and tools:** </br>
 </br>
