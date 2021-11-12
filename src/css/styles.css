@@ -46,3 +46,29 @@ ul {
 .text__normal {
   font-weight: normal;
 }
+.hero {
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-image: url('../../img/pexels-lara-jameson-8828583.jpg');
+}
+
+.conteiner {
+  display: block;
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 200px;
+}
+
+.input-box {
+  width: 250px;
+}
+
+.country-info,
+.country-list {
+  background-color: #fafafa;
+  padding: 5px;
+}
